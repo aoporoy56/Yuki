@@ -22,9 +22,9 @@ const Navigation = () => {
   const currentPath = window.location.pathname;
 
   const navLinks = [
-    { path: "/about", label: "About Us" },
+    { path: "/contact", label: "Contact Us" },
     { path: "/menu", label: "Menu" },
-    { path: "/find-us", label: "Find Us" },
+    { path: "/about", label: "About Us" },
     { path: "/whats-new", label: "What's New" },
   ];
 
@@ -49,11 +49,15 @@ const Navigation = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-gray-600 hover:text-gray-900 ${
+                  className={`relative text-gray-600 hover:text-gray-900 ${
                     currentPath === link.path ? "text-black font-semibold" : ""
-                  }`}
+                  } group`}
                 >
                   {link.label}
+                  {/* Animated underline */}
+                  <span
+                    className={`absolute left-0 bottom-0 w-0 h-[2px] bg-gray-900 transition-all duration-300 group-hover:w-full`}
+                  ></span>
                 </Link>
               ))}
             </div>
