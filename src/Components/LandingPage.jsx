@@ -1,4 +1,6 @@
 import React from "react";
+import { ChevronRight, ChevronUp } from "lucide-react";
+import { Link } from "react-router-dom";
 import img from "/img/hero.jpg";
 import img1 from "/img/img1.jpg";
 
@@ -23,26 +25,16 @@ const LandingPage = () => {
             <p className="text-2xl mb-12 text-gray-200">
               Experience authentic Japanese flavors
             </p>
-            <button
-              className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold 
-              shadow-lg hover:bg-red-700 transform hover:-translate-y-1 transition-all duration-300 
-              flex items-center space-x-2"
+            <Link
+              to="/delivery"
+              className="hidden md:inline-flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-md min-w-[200px] transition-all duration-300 hover:px-8 hover:scale-110 group"
             >
-              <span>Order Now</span>
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
+              <span className="font-medium">Order Delivery</span>
+              <ChevronRight
+                size={20}
+                className="transition-transform duration-300 "
+              />
+            </Link>
           </div>
         </div>
       </section>

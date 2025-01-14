@@ -27,7 +27,7 @@ const Menu__Sidebar = ({
                   className={`w-full group flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200 
                     ${
                       activeCategory === index
-                        ? "bg-indigo-600 text-white"
+                        ? "bg-red-600 text-white"
                         : "text-slate-600 hover:bg-slate-100"
                     }`}
                 >

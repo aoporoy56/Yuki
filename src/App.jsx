@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { User, Menu as MenuIcon, X } from "lucide-react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
 import Menu from "./Components/Menu";
 import WhatsNew from "./Components/WhatsNew";
 import AboutUs from "./Components/AboutUs";
@@ -8,18 +14,32 @@ import img from "/img/yuki_black.png";
 import FindUs from "./Components/FindUs";
 import TermsConditions from "./Components/TermsConditions";
 import PrivacyPolicy from "./Components/PrivacyPolicy";
-import ContactsFAQ from "./Components/ContactFAQ";
+import ContactUs from "./Components/ContactUs";
 import Footer from "./Components/Footer";
 import OrderDelivery from "./Components/OrderDelivery";
 import CookiePolicy from "./Components/CookiePolicy";
 import CopyrightPolicy from "./Components/CopyrightPolicy";
 import LandingPage from "./Components/LandingPage";
+import AuthForm from "./Components/AuthForm";
+import UserProfile from "./Components/UserProfile";
+
+import { auth } from "./firebase";
 import { CartProvider } from "./Context/CartContext";
 import { ToastProvider } from "./Context/ToastContext";
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const currentPath = window.location.pathname;
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    // Cleanup subscription
+    return () => unsubscribe();
+  }, []);
 
   const navLinks = [
     { path: "/contact", label: "Contact Us" },
@@ -56,7 +76,7 @@ const Navigation = () => {
                   {link.label}
                   {/* Animated underline */}
                   <span
-                    className={`absolute left-0 bottom-0 w-0 h-[2px] bg-gray-900 transition-all duration-300 group-hover:w-full`}
+                    className={`absolute left-0 bottom-0 w-0 h-[2px] bg-red-500 transition-all duration-300 group-hover:w-full`}
                   ></span>
                 </Link>
               ))}
@@ -65,15 +85,19 @@ const Navigation = () => {
             {/* Right Side Buttons */}
             <div className="flex items-center space-x-4">
               <Link
-                to="/delivery" // Set the path to the OrderDelivery component
-                className="hidden md:block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
+                to="/delivery"
+                className="hidden md:block relative overflow-hidden bg-red-600 text-white px-4 py-2 rounded-md group"
               >
-                Order Delivery
+                <span className="absolute inset-0 w-0 bg-red-700 transition-all duration-300 group-hover:w-full group-hover:scale-150"></span>
+                <span className="relative">Order Delivery</span>
               </Link>
 
-              <button className="p-2 rounded-full hover:bg-gray-100">
+              <Link
+                to={user ? "/profile" : "/auth"}
+                className="p-2 rounded-full hover:bg-gray-100"
+              >
                 <User className="h-6 w-6 text-gray-600" />
-              </button>
+              </Link>
 
               {/* Mobile Menu Button */}
               <button
@@ -143,6 +167,54 @@ const Navigation = () => {
   );
 };
 
+const AuthStateRoute = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (user) {
+    return <Navigate to="/profile" />;
+  }
+
+  return children;
+};
+
+const ProtectedRoute = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <Navigate to="/auth" />;
+  }
+
+  return children;
+};
+
 const App = () => {
   return (
     <Router basename="/yuki/">
@@ -160,10 +232,26 @@ const App = () => {
                 <Route path="whats-new" element={<WhatsNew />} />
                 <Route path="terms" element={<TermsConditions />} />
                 <Route path="privacy" element={<PrivacyPolicy />} />
-                <Route path="contact" element={<ContactsFAQ />} />
+                <Route path="contact" element={<ContactUs />} />
                 <Route path="delivery" element={<OrderDelivery />} />
                 <Route path="cookies" element={<CookiePolicy />} />
                 <Route path="copyright" element={<CopyrightPolicy />} />
+                <Route
+                  path="auth"
+                  element={
+                    <AuthStateRoute>
+                      <AuthForm />
+                    </AuthStateRoute>
+                  }
+                />
+                <Route
+                  path="profile"
+                  element={
+                    <ProtectedRoute>
+                      <UserProfile />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
             </main>
           </div>
