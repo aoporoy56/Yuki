@@ -75,7 +75,7 @@ const CartSummary = () => {
           <p className="text-gray-600 mb-4">Your cart is empty</p>
           <Link
             to="/menu"
-            className="inline-block bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+            className="inline-block bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors"
           >
             Browse Menu
           </Link>
@@ -173,7 +173,7 @@ const CartSummary = () => {
 
       <div className="p-6 bg-gray-50 border-t">
         <button
-          className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors font-medium"
+          className="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition-colors font-medium"
           onClick={() => {
             // Handle checkout logic here
           }}
@@ -253,7 +253,7 @@ const OrderDelivery = () => {
       {showLocationAlert && (
         <div className="mb-4 md:mb-6 bg-blue-50 border border-blue-200 rounded-lg p-3 md:p-4">
           <div className="flex items-center gap-2 mb-2">
-            <MapPin className="h-4 w-4 md:h-5 md:w-5 text-blue-500" />
+            <MapPin className="h-4 w-4 md:h-5 md:w-5 text-red-500" />
             <h3 className="font-semibold text-base md:text-lg">
               Enable Location Services
             </h3>
@@ -264,7 +264,7 @@ const OrderDelivery = () => {
             </p>
             <button
               onClick={handleLocationAccess}
-              className="w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors text-sm md:text-base"
+              className="w-full sm:w-auto bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors text-sm md:text-base"
             >
               Enable
             </button>

@@ -42,10 +42,10 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { path: "/contact", label: "Contact Us" },
+    { path: "/whats-new", label: "What's New" },
     { path: "/menu", label: "Menu" },
     { path: "/about", label: "About Us" },
-    { path: "/whats-new", label: "What's New" },
+    { path: "/contact", label: "Contact Us" },
   ];
 
   const closeMobileMenu = () => {

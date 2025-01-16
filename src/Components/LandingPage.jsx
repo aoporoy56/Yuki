@@ -3,6 +3,7 @@ import { ChevronRight, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import img from "/img/hero.jpg";
 import img1 from "/img/img1.jpg";
+import FoodMenuSlider from "./FoodMenuSlider";
 
 const LandingPage = () => {
   return (
@@ -48,7 +49,8 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Traditional Flavors Section - Removed diagonal styling for tablet/mobile */}
+      <FoodMenuSlider />
+
       <section className="relative py-32 overflow-hidden">
         <div className="container mx-auto px-6">
           <div className="relative">
@@ -91,54 +93,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Featured Items */}
-      <section className="py-24 bg-gradient-to-b from-slate-50 to-white">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-800">
-            Popular Dishes
-          </h2>
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              {
-                name: "Signature Sushi Set",
-                price: "€24.99",
-                image: "/img/food1.jpg",
-              },
-              {
-                name: "Ramen Collection",
-                price: "€16.99",
-                image: "/img/food2.jpg",
-              },
-              {
-                name: "Tempura Platter",
-                price: "€19.99",
-                image: "/img/food3.jpg",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl 
-                  transform hover:-translate-y-2 transition-all duration-300"
-              >
-                <div className="h-72 relative overflow-hidden ">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-3 text-gray-800">
-                    {item.name}
-                  </h3>
-                  <p className="text-red-600 text-xl font-bold">{item.price}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Opening Hours */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
@@ -150,17 +104,11 @@ const LandingPage = () => {
               {[
                 {
                   title: "Dine-in",
-                  hours: [
-                    { days: "Monday - Friday", time: "12:00 - 22:00" },
-                    { days: "Saturday - Sunday", time: "13:00 - 23:00" },
-                  ],
+                  hours: [{ days: "7 days a week", time: "3:00PM - 11:00PM" }],
                 },
                 {
                   title: "Takeaway",
-                  hours: [
-                    { days: "Monday - Friday", time: "11:30 - 21:30" },
-                    { days: "Saturday - Sunday", time: "12:30 - 22:30" },
-                  ],
+                  hours: [{ days: "7 days a week", time: "3:00PM - 11:00PM" }],
                 },
               ].map((section, index) => (
                 <div key={index} className="space-y-6">

@@ -1,0 +1,64 @@
+[
+    {
+        "category": "Starters and Sides",
+        "items": [
+            {
+                "name": "Rice",
+                "description": "Single portion of rice",
+                "price": "£1.99",
+                "image": "/img/food1.jpg"
+            },
+            {
+                "name": "Miso Soup",
+                "description": "Served with tofu, sesame seeds, wakami and spring onions",
+                "price": "£2.99",
+                "image": "/img/food2.jpg"
+            }
+        ]
+    },
+    {
+        "category": "Nigiri and Gunkan",
+        "items": [
+            {
+                "name": "Fresh Water Eel Nigiri",
+                "description": "Fresh made nigiri with unagi eel on hand pressed rice",
+                "price": "£4.75",
+                "image": "/img/food10.jpg"
+            },
+            {
+                "name": "Japanese Omelette Nigiri",
+                "description": "Fresh made omelette nigiri with Japanese omelette",
+                "price": "£4.90",
+                "image": "/img/food1.jpg"
+            }
+        ]
+    },
+    {
+        "category": "Temaki Handrolls",
+        "items": [
+            {
+                "name": "Avocado & Cucumber Temaki",
+                "description": "Handroll with avocado and cucumber",
+                "price": "£4.50",
+                "image": "/img/food8.jpg"
+            },
+            {
+                "name": "Avocado Temaki",
+                "description": "Handroll with avocado and Japanese mayo topped with sesame seeds",
+                "price": "£4.55",
+                "image": "/img/food9.jpg"
+            }
+        ]
+    },
+    {
+        "category": "Yakiudon Noodles",
+        "items": [
+            {
+                "name": "Chicken Yakiudon",
+                "description": "Served with mixed peppers, cabbage, mushroom, carrots, bean sprouts, spring onion and sesame oil",
+                "price": "£10.99",
+                "image": "/img/food1.jpg"
+            }
+        ]
+    }
+]

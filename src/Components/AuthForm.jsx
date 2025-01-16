@@ -174,7 +174,14 @@ const AuthForm = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div
+      className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center"
+      style={{
+        backgroundColor: "rgb(255,0,0)",
+        background:
+          " linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(251,203,203,1) 30%, rgba(251,203,203,1) 50%, rgba(251,203,203,1) 70%, rgba(255,0,0,1) 100%)",
+      }}
+    >
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
         {/* Header */}
         <div className="text-center">

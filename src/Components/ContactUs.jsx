@@ -13,26 +13,18 @@ const ContactUs = () => {
 
   const locations = [
     {
-      name: "Downtown Restaurant",
-      address: "123 Main Street, Downtown, City, 12345",
-      phone: "(555) 123-4567",
-      hours: "Mon-Fri: 11AM - 10PM\nWeekends: 12PM - 11PM",
-      email: "downtown@restaurant.com",
-    },
-    {
-      name: "Westside Location",
-      address: "456 West Avenue, Westside, City, 12345",
-      phone: "(555) 234-5678",
-      hours: "Mon-Fri: 11AM - 11PM\nWeekends: 12PM - 11PM",
-      email: "westside@restaurant.com",
+      name: "Yuki Restaurants",
+      address: "123 Markhouse Rd, London E17 8DQ",
+      phone: "020 3340 6841",
+      hours: "7 Days a Week: 3:00 PM - 11:00 PM",
+      email: "info@yukirestaurants.com",
     },
   ];
 
   const faqs = [
     {
       question: "What are your opening hours?",
-      answer:
-        "We're open Monday to Friday from 11:00 AM to 10:00 PM, and weekends from 12:00 PM to 11:00 PM.",
+      answer: "We're open seven days a week from 3:00 PM to 11:00 PM.",
     },
     {
       question: "Do you offer vegetarian options?",
@@ -70,6 +62,22 @@ const ContactUs = () => {
 
         {/* Locations Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          {/* Google Maps Component */}
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition duration-300 hover:scale-[1.02]">
+            <div className="w-full h-full min-h-[600px] lg:min-h-[400px]">
+              <div className="relative w-full h-full">
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full border-0"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2479.880226766239!2d-0.03223677670280005!3d51.57666027181897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761daedf917931%3A0xd62c71ffd9b25d0a!2sYuki%20Restaurants!5e0!3m2!1sen!2suk!4v1705340391344!5m2!1sen!2suk"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          {/* Location Card */}
           {locations.map((location, index) => (
             <div
               key={index}
