@@ -134,8 +134,8 @@ const CartSummary = ({ address, name, phone, instructions, couponCode }) => {
                 className={`px-6 py-2 rounded-lg border font-medium transition-all
                   ${
                     tip === (subtotal * percentage) / 100
-                      ? "border-blue-500 bg-blue-50 text-blue-700"
-                      : "border-gray-200 hover:border-blue-200 text-gray-700"
+                      ? "border-red-500 bg-red-50 text-red-700"
+                      : "border-gray-200 hover:border-red-200 text-gray-700"
                   }`}
               >
                 {percentage}%
@@ -263,14 +263,14 @@ const OrderDelivery = () => {
               placeholder="Full Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="flex-1 p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base"
+              className="flex-1 p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base"
             />
             <input
               type="tel"
               placeholder="Phone Number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="flex-1 p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base"
+              className="flex-1 p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base"
             />
           </div>
 
@@ -280,14 +280,14 @@ const OrderDelivery = () => {
               placeholder="Enter your delivery address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base"
+              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base"
             />
 
             <textarea
               placeholder="Special instructions for delivery (optional)"
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base min-h-[100px] resize-none"
+              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base min-h-[100px] resize-none"
             />
           </div>
 
@@ -302,21 +302,21 @@ const OrderDelivery = () => {
                 placeholder="Enter coupon code"
                 value={couponCode}
                 onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                className="flex-1 p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base"
+                className="flex-1 p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base"
               />
               <button
                 onClick={handleCouponValidation}
                 className={`px-6 py-2 rounded-md transition-colors ${
                   isCouponValid
-                    ? "bg-green-500 text-white"
-                    : "bg-blue-500 text-white hover:bg-blue-600"
+                    ? "bg-orange-500 text-white"
+                    : "bg-red-500 text-white hover:bg-red-600"
                 }`}
               >
                 {isCouponValid ? "Applied" : "Apply"}
               </button>
             </div>
             {isCouponValid && (
-              <p className="text-green-600 text-sm mt-2">
+              <p className="text-red-600 text-sm mt-2">
                 Coupon applied successfully!
               </p>
             )}

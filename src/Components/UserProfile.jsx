@@ -70,8 +70,8 @@ const UserProfile = () => {
               className="w-24 h-24 rounded-full border-4 border-gray-200"
             />
           ) : (
-            <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center border-4 border-gray-200">
-              <User className="w-12 h-12 text-blue-600" />
+            <div className="w-24 h-24 rounded-full bg-red-100 flex items-center justify-center border-4 border-gray-200">
+              <User className="w-12 h-12 text-red-600" />
             </div>
           )}
           <div className="flex-1">
@@ -106,7 +106,7 @@ const UserProfile = () => {
             className={`px-4 py-2 rounded-lg flex items-center transition-colors ${
               isEditing
                 ? "bg-green-500 text-white hover:bg-green-600"
-                : "bg-blue-50 text-blue-600 hover:bg-blue-100"
+                : "bg-red-50 text-red-600 hover:bg-red-100"
             }`}
             disabled={isSaving}
           >
@@ -131,7 +131,7 @@ const UserProfile = () => {
                 onChange={(e) =>
                   setProfileData({ ...profileData, fullName: e.target.value })
                 }
-                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                 placeholder="Enter your full name"
               />
             ) : (
@@ -153,7 +153,7 @@ const UserProfile = () => {
                 onChange={(e) =>
                   setProfileData({ ...profileData, phone: e.target.value })
                 }
-                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                 placeholder="Enter your phone number"
               />
             ) : (
@@ -175,7 +175,7 @@ const UserProfile = () => {
                 onChange={(e) =>
                   setProfileData({ ...profileData, address: e.target.value })
                 }
-                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                 placeholder="Enter your delivery address"
               />
             ) : (

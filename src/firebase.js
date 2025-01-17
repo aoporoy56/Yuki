@@ -20,6 +20,8 @@ import {
   where,
   updateDoc,
   orderBy,
+  getDocs,
+  writeBatch,
 } from "firebase/firestore";
 
 // Firebase configuration
@@ -172,6 +174,24 @@ async function deleteContactSubmission(submissionId) {
   }
 }
 
+async function resetAllOrders() {
+  try {
+    const batch = writeBatch(db);
+    const ordersRef = collection(db, "orders");
+    const snapshot = await getDocs(ordersRef);
+
+    snapshot.docs.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+
+    await batch.commit();
+    console.log("All orders have been reset");
+  } catch (error) {
+    console.error("Error resetting orders:", error);
+    throw error;
+  }
+}
+
 export {
   auth,
   db,
@@ -186,4 +206,5 @@ export {
   submitContactForm,
   archiveContactSubmission,
   deleteContactSubmission,
+  resetAllOrders,
 };
