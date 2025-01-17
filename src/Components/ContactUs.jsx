@@ -7,10 +7,44 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
+import { submitContactForm } from "../firebase";
+import { useToast } from "../Context/ToastContext";
 
 const ContactUs = () => {
+  const { showToast } = useToast();
   const [openFAQ, setOpenFAQ] = useState(null);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await submitContactForm(formData);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: "",
+      });
+      showToast("Message sent successfully!", "success");
+    } catch (error) {
+      showToast("Error sending message. Please try again.", "error");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Rest of the component remains the same...
   const locations = [
     {
       name: "Yuki Restaurants",
@@ -142,7 +176,7 @@ const ContactUs = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">
             Send Us a Message
           </h2>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -150,8 +184,12 @@ const ContactUs = () => {
                 </label>
                 <input
                   type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
                   placeholder="John"
+                  required
                 />
               </div>
               <div>
@@ -160,8 +198,12 @@ const ContactUs = () => {
                 </label>
                 <input
                   type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
                   placeholder="Doe"
+                  required
                 />
               </div>
             </div>
@@ -171,8 +213,12 @@ const ContactUs = () => {
               </label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
                 placeholder="john@example.com"
+                required
               />
             </div>
             <div>
@@ -181,8 +227,12 @@ const ContactUs = () => {
               </label>
               <textarea
                 rows="6"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
                 placeholder="How can we help you?"
+                required
               ></textarea>
             </div>
             <button

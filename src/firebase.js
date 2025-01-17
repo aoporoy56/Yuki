@@ -15,6 +15,11 @@ import {
   setDoc,
   addDoc,
   Timestamp,
+  deleteDoc,
+  query,
+  where,
+  updateDoc,
+  orderBy,
 } from "firebase/firestore";
 
 // Firebase configuration
@@ -67,20 +72,27 @@ async function createOrder(orderData) {
   try {
     const ordersCollection = collection(db, "orders");
 
+    // Create base order document with proper number parsing
     const orderDoc = {
-      customerId: orderData.customerId,
-      customerName: orderData.customerName,
-      customerEmail: orderData.customerEmail,
       items: orderData.items.map((item) => ({
-        itemId: item.id,
+        itemId: item.name.toLowerCase().replace(/\s+/g, "-"),
         name: item.name,
         quantity: item.quantity,
-        price: item.price,
+        price: parseFloat(item.price.replace(/[^0-9.-]+/g, "")),
       })),
-      totalAmount: orderData.items.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      ),
+      customer: {
+        name: orderData.name,
+        phone: orderData.phone,
+        address: orderData.address,
+      },
+      delivery: {
+        address: orderData.address,
+        fee: parseFloat(orderData.deliveryFee) || 0,
+      },
+      subtotal: parseFloat(orderData.subtotal) || 0,
+      tax: parseFloat(orderData.tax) || 0,
+      tip: parseFloat(orderData.tip) || 0,
+      total: parseFloat(orderData.total) || 0,
       status: "pending",
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
@@ -112,6 +124,54 @@ async function updateOrderStatus(orderId, newStatus) {
   }
 }
 
+async function submitContactForm(formData) {
+  try {
+    const contactCollection = collection(db, "contact-submissions");
+
+    const contactDoc = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      message: formData.message,
+      createdAt: Timestamp.now(),
+      archived: false,
+    };
+
+    const docRef = await addDoc(contactCollection, contactDoc);
+    return docRef.id;
+  } catch (error) {
+    console.error("Error submitting contact form:", error);
+    throw error;
+  }
+}
+
+//Contact Submission
+
+async function archiveContactSubmission(submissionId) {
+  try {
+    const submissionRef = doc(db, "contact-submissions", submissionId);
+    await updateDoc(submissionRef, {
+      archived: true,
+      archivedAt: Timestamp.now(),
+    });
+    console.log("Message archived successfully");
+  } catch (error) {
+    console.error("Error archiving message:", error);
+    throw error;
+  }
+}
+
+async function deleteContactSubmission(submissionId) {
+  try {
+    const submissionRef = doc(db, "contact-submissions", submissionId);
+    await deleteDoc(submissionRef);
+    console.log("Message deleted successfully");
+  } catch (error) {
+    console.error("Error deleting message:", error);
+    throw error;
+  }
+}
+
 export {
   auth,
   db,
@@ -123,4 +183,7 @@ export {
   uploadMenuData,
   createOrder,
   updateOrderStatus,
+  submitContactForm,
+  archiveContactSubmission,
+  deleteContactSubmission,
 };

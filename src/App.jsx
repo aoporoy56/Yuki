@@ -22,6 +22,7 @@ import CopyrightPolicy from "./Components/CopyrightPolicy";
 import LandingPage from "./Components/LandingPage";
 import AuthForm from "./Components/AuthForm";
 import UserProfile from "./Components/UserProfile";
+import AdminDashboard from "./Components/AdminDashboard";
 
 import { auth } from "./firebase";
 import { CartProvider } from "./Context/CartContext";
@@ -236,6 +237,7 @@ const App = () => {
                 <Route path="delivery" element={<OrderDelivery />} />
                 <Route path="cookies" element={<CookiePolicy />} />
                 <Route path="copyright" element={<CopyrightPolicy />} />
+                <Route path="admin" element={<AdminDashboard />} />
                 <Route
                   path="auth"
                   element={
