@@ -219,7 +219,7 @@ const ProtectedRoute = ({ children }) => {
 
 const App = () => {
   return (
-    <Router basename="/yuki/">
+    <Router>
       <ToastProvider>
         <CartProvider>
           <div className="min-h-screen bg-white">
